@@ -122,8 +122,7 @@ Create a group of contexts from a context generator
 | *→result* | object | Context from generator object with simple context methods and : {first, get}. First and get return a context with simple context with : {first, next, previous, contextId, custom, createContext} |
 ```js
 const contexts = doc.createContextFromGenerator(doc.contextGenerators.accordions(5));
-let context = contexts.first(); // or contexts.get(1);
-for(let context = contexts.first(); context.contextId() < 10; context = context.next()) {
+for(let context = contexts.first() /* or contexts.get(1) */; context.contextId() < 10; context = context.next()) {
   context.line(0, 0, 50, 100);
 }
 ```
