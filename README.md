@@ -1,6 +1,8 @@
 # jsPDF-Context-plugin
 Plugin to make custom context with jsPDF.
 
+![Plugin realisation exemple](readmefiles/exemple.PNG)
+
 Contexts are areas in which you can set properties (TextColor, DrawColor, Font, FontSize...) separately or with inheritance.
 	
 ## Usage
@@ -57,8 +59,7 @@ List of predefined context generators
 
 #### contextGenerator.columns (number: number; options: object) → function(id: number)
 Generator to create columns
-| 1 | 2 | 3 | 4 | ⤶
-| 5 | 6 | 7 | 8 |
+![Plugin realisation exemple](readmefiles/columns.PNG)
 
 | Name | Type | Description |
 | --------------- | --------------- | --------------- |
@@ -73,8 +74,7 @@ doc.contextGenerators.columns(5, {
 
 #### contextGenerator.accordions (number: number, options: object) → function(id: number)
 Generator to create alternated columns for double-sided printing 
-| 1 | 3 | 5 | 7 | ⤶
-| 8 | 6 | 4 | 2 |
+![Plugin realisation exemple](readmefiles/accordions.PNG)
 | Name | Type | Description |
 | --------------- | --------------- | --------------- |
 | number | number | The number of columns by page side |
