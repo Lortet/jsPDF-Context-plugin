@@ -28,7 +28,7 @@ Adds a function that can be called from a context.
 | *→result* | boolean | true if the function was added. false if name already exist. |
 ```js
 \\ register jsPDF.drawClouds(type, x, y, options)
-jsPDF.registerContextableFunction('drawClouds', [,1])
+doc.registerContextableFunction('drawClouds', [,1])
 ```
 ---
 
@@ -41,10 +41,10 @@ Adds a state that can be saved and applied from a context.
 | model | object\|undefined | undefined if the result of set\<Name\>() is the same of argument of get\<Name\>(). Else, you need to give setter or getter {set: function, get: function} |
 ```js
 \\ register jsPDF.setTintColor(color) \ color = jsPDF.getTintColor();
-jsPDF.registerContextableState('TintColor')
+doc.registerContextableState('TintColor')
 
 \\ register jsPDF.setFont(fontName, fontStyle, fontWeight) \ {fontName, fontStyle, fontWeight} = jsPDF.getFont();
-jsPDF.registerContextableState('Font', {
+doc.registerContextableState('Font', {
 	set: (obj) => ([obj.fontName,obj.fontStyle,obj.fontWeight]),
 	get: (arr) => ({fontName:arr[0],fontStyle:arr[1],fontWeight:arr[2]})
 }
@@ -66,7 +66,7 @@ Generator to create columns
 | options | object | {offsetLeft, offsetTop, offsetPage, margin, padding, height, width} |
 | *→result* | function(id) | Generator to pass to createContextFromGenerator. |
 ```js
-jsPDF.contextGenerators.columns(5, {
+doc.contextGenerators.columns(5, {
   margin: 10
 }
 ```
@@ -81,7 +81,7 @@ Generator to create alternated columns for double-sided printing
 | options | object | {offsetLeft, offsetTop, offsetPage, margin, padding, height, width} |
 | *→result* | function(id) | Generator to pass to createContextFromGenerator. |
 ```js
-jsPDF.contextGenerators.accordions(5, {
+doc.contextGenerators.accordions(5, {
   margin: 10,
   offsetTop: 30
 }
@@ -100,7 +100,7 @@ Create a simple context
 | options | object | {height, width} |
 | *→result* | object | Simple context object with context methods : {level, pdfContext, parentContext, firstLevelContext, pageNumber, contextLeft, contextTop, contextWidth, contextHeight, contextRight, contextBottom, setFont, setTextColor, text, line, ...} |
 ```js
-const context = jsPDF.createContext(10, 10, 0, {
+const context = doc.createContext(10, 10, 0, {
   width: 100,
   height: 50
 });
@@ -121,7 +121,7 @@ Create a group of contexts from a context generator
 | generator | function(id) | Generator function which return context informations from id |
 | *→result* | object | Context from generator object with simple context methods and : {first, get}. First and get return a context with simple context with : {first, next, previous, contextId, custom, createContext} |
 ```js
-const contexts = jsPDF.createContextFromGenerator(jsPDF.contextGenerators.accordions(5));
+const contexts = doc.createContextFromGenerator(doc.contextGenerators.accordions(5));
 let context = contexts.first(); // or contexts.get(1);
 for(let context = contexts.first(); context.contextId() < 10; context = context.next()) {
   context.line(0, 0, 50, 100);
