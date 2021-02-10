@@ -59,6 +59,7 @@ List of predefined context generators
 
 #### contextGenerator.columns (number: number; options: object) → function(id: number)
 Generator to create columns
+
 ![Plugin realisation exemple](readmefiles/columns.PNG)
 
 | Name | Type | Description |
