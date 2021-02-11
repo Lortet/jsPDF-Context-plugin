@@ -9,7 +9,7 @@ Contexts are areas in which you can set properties (TextColor, DrawColor, Font, 
 You need to include jsPDF before context.
 ```html
 <script src="./script/jspdf.min.js"></script>
-<script src="./script/jspdf.plugin.context.min.js"></script>
+<script src="./script/jspdf.plugin.context.min.js" integrity="sha384-JEzFu3TR+yJLU1HHGWTmCtGHRYPhSOE1n8Alr71XhivZh4aYbS0L+CqUWraCed8F"></script>
 ```
 	
 ## Methods
