@@ -60,10 +60,10 @@ doc.registerContextableState('Font', {
 
 
 ### contextGenerators
-List of predefined context generators
+List of predefined function that return [contextGenerator](#ContextGenerator).
 
 #### contextGenerator.columns (number: number; options: object) → function(id: number)
-Generator to create columns
+[ContextGenerators](#ContextGenerator) to create columns
 
 ![Plugin realisation exemple](readmefiles/columns.PNG)
 
@@ -71,7 +71,7 @@ Generator to create columns
 | --------------- | --------------- | --------------- |
 | number | number | The number of columns by page side |
 | options | object | {offsetLeft, offsetTop, offsetPage, margin, padding, height, width} |
-| *→result* | function(id) | Generator to pass to createContextFromGenerator. |
+| *→result* | function(id) | [ContextGenerators](#ContextGenerator) to pass to createContextFromGenerator. |
 ```js
 doc.contextGenerators.columns(5, {
   margin: 10
@@ -79,13 +79,13 @@ doc.contextGenerators.columns(5, {
 ```
 
 #### contextGenerator.accordions (number: number, options: object) → function(id: number)
-Generator to create alternated columns for double-sided printing 
+[ContextGenerators](#ContextGenerator) to create alternated columns for double-sided printing 
 ![Plugin realisation exemple](readmefiles/accordions.PNG)
 | Name | Type | Description |
 | --------------- | --------------- | --------------- |
 | number | number | The number of columns by page side |
 | options | object | {offsetLeft, offsetTop, offsetPage, margin, padding, height, width} |
-| *→result* | function(id) | Generator to pass to createContextFromGenerator. |
+| *→result* | function(id) | [ContextGenerators](#ContextGenerator) to pass to createContextFromGenerator. |
 ```js
 doc.contextGenerators.accordions(5, {
   margin: 10,
@@ -125,10 +125,53 @@ Create a group of contexts from a context generator
 | Name | Type | Description |
 | --------------- | --------------- | --------------- |
 | generator | function(id) | Generator function which return context informations from id |
-| *→result* | object | Context from generator object with simple context methods and : {first, get}. First and get return a context with simple context with : {first, next, previous, contextId, custom, createContext} |
+| *→result* | object | [ContextObject](#ContextObject) |
 ```js
 const contexts = doc.createContextFromGenerator(doc.contextGenerators.accordions(5));
 for(let context = contexts.first() /* or contexts.get(1) */; context.contextId() < 10; context = context.next()) {
   context.line(0, 0, 50, 100);
+}
+```
+
+## Objects
+
+### ContextGenerator
+An function that return a [contextInformationsObject](#ContextInformationsObject) from a number (id) paraméters
+
+### ContextInformationsObject
+An object that contains informations about context. It used by [contextGenerators](#ContextGenerator).
+
+```js
+{
+	pageNumber,
+	x,
+	y,
+	width,
+	height,
+	custom
+}
+```
+
+### ContextObject
+An object that represent a context returned by [createContext](#createcontext-x-number-y-number-pageoffset-number-options-object--object).
+
+```js
+{
+	level(),
+	pdfContext(),
+	parentContext(),
+	firstLevelContext(),
+	pageNumber(),
+	contextLeft(),
+	contextTop(),
+	contextWidth(),
+	contextHeight(),
+	contextRight(),
+	contextBottom(),
+	setFont(),
+	setTextColor(),
+	text(),
+	line(),
+	...
 }
 ```
