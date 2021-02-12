@@ -11,6 +11,11 @@ You need to include jsPDF before context.
 <script src="./script/jspdf.min.js"></script>
 <script src="./script/jspdf.plugin.context.min.js" integrity="sha384-JEzFu3TR+yJLU1HHGWTmCtGHRYPhSOE1n8Alr71XhivZh4aYbS0L+CqUWraCed8F"></script>
 ```
+
+## Compatible plugins
+
+[jsPDF-ConstraintElements-plugin](https://github.com/Lortet/jsPDF-ConstraintElements-plugin) : Methods are automatically added to contexts if they are present.
+
 	
 ## Methods
 
