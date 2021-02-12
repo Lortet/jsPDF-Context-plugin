@@ -104,7 +104,7 @@ Create a simple context
 | y | number | Top offset of the context |
 | pageOffset | number | Page offset of the context from the first page (or parent context page) |
 | options | object | {height, width} |
-| *→result* | object | Simple context object with context methods : {level, pdfContext, parentContext, firstLevelContext, pageNumber, contextLeft, contextTop, contextWidth, contextHeight, contextRight, contextBottom, setFont, setTextColor, text, line, ...} |
+| *→result* | object | [ContextObject](#ContextObject) |
 ```js
 const context = doc.createContext(10, 10, 0, {
   width: 100,
@@ -125,7 +125,7 @@ Create a group of contexts from a context generator
 | Name | Type | Description |
 | --------------- | --------------- | --------------- |
 | generator | function(id) | Generator function which return context informations from id |
-| *→result* | object | [ContextObject](#ContextObject) |
+| *→result* | object | [GeneratorInstanceObject](#GeneratorInstanceObject) |
 ```js
 const contexts = doc.createContextFromGenerator(doc.contextGenerators.accordions(5));
 for(let context = contexts.first() /* or contexts.get(1) */; context.contextId() < 10; context = context.next()) {
@@ -173,5 +173,29 @@ An object that represent a context returned by [createContext](#createcontext-x-
 	text(),
 	line(),
 	...
+}
+```
+
+### GeneratorInstanceObject
+An object that represent a context returned by [createContextFromGenerator](#createcontextfromgenerator-generator-functionid-pageoffset-number--object).
+
+```js
+{
+	[...ContextObject](#ContextObject),
+	get(id),
+	first()
+}
+```
+
+### GeneratorContextObject
+An object that represent a context returned by [generatorInstanceObject](#GeneratorInstanceObject).
+
+```js
+{
+	[...GeneratorInstanceObject](#GeneratorInstanceObject),
+	next(null|number),
+	previous(null|number),
+	contextId(),
+	custom()
 }
 ```
